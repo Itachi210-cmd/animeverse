@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>The Anime Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <div class="notification-container"></div>
+    <nav class="navbar">
+        <div class="logo">ANIME<span>VERSE</span></div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+            <li><a href="#"><i class="fas fa-star"></i> Reviews</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Top Anime</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> Community</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Sign Up</a>
+        </div>
+    </nav>
+
+    <header style="background-image: url('http://getwallpapers.com/wallpaper/full/3/5/a/762971-download-free-naruto-vs-sasuke-wallpaper-1920x1080-pictures.jpg'); background-size: cover; background-position: center;">
+        <div class="header-content">
+            <h1>WELCOME TO ANIME HUB</h1>
+            <p>Your Ultimate Source for Anime News, Reviews, and Community</p>
+        </div>
+        <div class="header-overlay"></div>
+    </header>
+
+    <section class="big-three">
+        <h2>The Big Three</h2>
+        <div class="big-three-container">
+            <div class="big-three-card">
+                <img src="https://cdn.myanimelist.net/images/anime/13/17405.jpg" alt="Naruto" />
+                <div class="big-three-content">
+                    <h3>Naruto</h3>
+                    <p>Follow Naruto Uzumaki's journey to become the greatest ninja and Hokage of his village.</p>
+                    <div class="big-three-stats">
+                        <span><i class="fas fa-star"></i> 8.2</span>
+                        <span><i class="fas fa-calendar"></i> 2002-2007</span>
+                        <span><i class="fas fa-film"></i> 220 Episodes</span>
+                    </div>
+                    <button class="watch-btn" onclick="addToWatchlist({
+                        id: 20,
+                        title: 'Naruto',
+                        image: 'https://cdn.myanimelist.net/images/anime/13/17405.jpg'
+                    })">
+                        <i class="fas fa-plus"></i> Add to Watchlist
+                    </button>
+                </div>
+            </div>
+            
+            <div class="big-three-card">
+                <img src="https://cdn.myanimelist.net/images/anime/3/40451.jpg" alt="Bleach" />
+                <div class="big-three-content">
+                    <h3>Bleach</h3>
+                    <p>Join Ichigo Kurosaki as he battles evil spirits and protects the living world.</p>
+                    <div class="big-three-stats">
+                        <span><i class="fas fa-star"></i> 7.9</span>
+                        <span><i class="fas fa-calendar"></i> 2004-2012</span>
+                        <span><i class="fas fa-film"></i> 366 Episodes</span>
+                    </div>
+                    <button class="watch-btn" onclick="addToWatchlist({
+                        id: 269,
+                        title: 'Bleach',
+                        image: 'https://cdn.myanimelist.net/images/anime/3/40451.jpg'
+                    })">
+                        <i class="fas fa-plus"></i> Add to Watchlist
+                    </button>
+                </div>
+            </div>
+            
+            <div class="big-three-card">
+                <img src="https://cdn.myanimelist.net/images/anime/6/73245.jpg" alt="One Piece" />
+                <div class="big-three-content">
+                    <h3>One Piece</h3>
+                    <p>Follow Monkey D. Luffy and his crew in their quest to find the ultimate treasure.</p>
+                    <div class="big-three-stats">
+                        <span><i class="fas fa-star"></i> 8.6</span>
+                        <span><i class="fas fa-calendar"></i> 1999-Present</span>
+                        <span><i class="fas fa-film"></i> 1000+ Episodes</span>
+                    </div>
+                    <button class="watch-btn" onclick="addToWatchlist({
+                        id: 21,
+                        title: 'One Piece',
+                        image: 'https://cdn.myanimelist.net/images/anime/6/73245.jpg'
+                    })">
+                        <i class="fas fa-plus"></i> Add to Watchlist
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="latest-updates">
+        <h2>Latest Updates</h2>
+        <div class="update-container">
+            <div class="update">
+                <img src="https://cdn.myanimelist.net/images/anime/1170/124312.jpg" alt="Jujutsu Kaisen Season 2" />
+                <h3>Jujutsu Kaisen Season 2</h3>
+                <p>The latest season continues with intense battles and revelations in the Shibuya Incident Arc.</p>
+                <div class="update-info">
+                    <span><i class="fas fa-star"></i> 9.1</span>
+                    <span><i class="fas fa-calendar"></i> Latest: EP 23</span>
+                </div>
+                <a href="https://myanimelist.net/anime/51009/Jujutsu_Kaisen_2nd_Season" target="_blank">Read more</a>
+            </div>
+
+            <div class="update">
+                <img src="https://cdn.myanimelist.net/images/anime/1015/138006.jpg" alt="Solo Leveling" />
+                <h3>Solo Leveling</h3>
+                <p>The highly anticipated adaptation of the popular manhwa has begun airing!</p>
+                <div class="update-info">
+                    <span><i class="fas fa-star"></i> 8.8</span>
+                    <span><i class="fas fa-calendar"></i> Now Airing</span>
+                </div>
+                <a href="https://myanimelist.net/anime/52299/Solo_Leveling" target="_blank">Read more</a>
+            </div>
+
+            <div class="update">
+                <img src="https://cdn.myanimelist.net/images/anime/1506/138982.jpg" alt="Demon Slayer Season 4" />
+                <h3>Demon Slayer: Hashira Training Arc</h3>
+                <p>The upcoming season focuses on the intense training of the Hashira.</p>
+                <div class="update-info">
+                    <span><i class="fas fa-calendar"></i> Spring 2024</span>
+                    <span><i class="fas fa-clock"></i> Coming Soon</span>
+                </div>
+                <a href="https://myanimelist.net/anime/55653/Kimetsu_no_Yaiba__Hashira_Geiko-hen" target="_blank">Read more</a>
+            </div>
+
+            <div class="update">
+                <img src="https://cdn.myanimelist.net/images/anime/1898/138005l.jpg" alt="Mushoku Tensei II" />
+                <h3>Mushoku Tensei II</h3>
+                <p>The second part of Mushoku Tensei Season 2 is set to continue Rudeus's epic journey.</p>
+                <div class="update-info">
+                    <span><i class="fas fa-star"></i> 8.7</span>
+                    <span><i class="fas fa-calendar"></i> April 2024</span>
+                </div>
+                <a href="https://myanimelist.net/anime/57197/Mushoku_Tensei_II__Isekai_Ittara_Honki_Dasu_Part_2" target="_blank">Read more</a>
+            </div>
+
+            <div class="update">
+                <img src="https://www.animenewsnetwork.com/images/encyc/A26340-2800617602.1687648957.jpg" alt="Rent-a-Girlfriend Season 3" />
+                <h3>Rent-a-Girlfriend Season 3</h3>
+                <p>Follow Kazuya and Chizuru's complicated relationship in the latest season!</p>
+                <div class="update-info">
+                    <span><i class="fas fa-star"></i> 7.4</span>
+                    <span><i class="fas fa-calendar"></i> Latest Season</span>
+                </div>
+                <a href="https://myanimelist.net/anime/53050/Kanojo_Okarishimasu_3rd_Season" target="_blank">Read more</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="popular-anime">
+        <h2>Popular Anime</h2>
+
+        <div class="anime-filters">
+            <input type="text" id="anime-search" placeholder="Search anime..." />
+            <select id="anime-type-filter">
+                <option value="">All Types</option>
+                <option value="tv">TV</option>
+                <option value="movie">Movie</option>
+                <option value="ova">OVA</option>
+                <option value="special">Special</option>
+                <option value="ona">ONA</option>
+                <option value="music">Music</option>
+            </select>
+        </div>
+
+        <div class="anime-grid"></div>
+    </section>
+
+    <section class="anime-calendar">
+        <h2>Upcoming Anime</h2>
+        <div class="calendar-grid">
+        </div>
+    </section>
+
+    <section class="watchlist">
+        <h2>My Watchlist</h2>
+        <div class="watchlist-grid">
+            <p id="watchlist-empty">Your watchlist is empty.</p>
+        </div>
+    </section>
+
+    <section class="ranking-system">
+        <h2>Anime Rankings</h2>
+        <div class="rankings-grid">
+        </div>
+        <input type="text" id="anime-title" placeholder="Enter Anime Title" />
+        <input type="number" id="anime-score" placeholder="Enter Score (0-10)" />
+        <button id="add-ranking">Add Ranking</button>
+    </section>
+
+    <section class="community">
+        <h2>Community Discussions</h2>
+        <div class="comments-container">
+            <div class="comment-form">
+                <div class="user-avatar">
+                    <img src="https://ui-avatars.com/api/?name=User&background=ff4757&color=fff" alt="User Avatar">
+                </div>
+                <form id="commentForm">
+                    <textarea placeholder="Share your thoughts..." required></textarea>
+                    <div class="comment-actions">
+                        <button type="submit" class="submit-comment">
+                            <i class="fas fa-paper-plane"></i> Post Comment
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="comments-list">
+                <div class="comment">
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=AnimeFan&background=1e90ff&color=fff" alt="User Avatar">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="username">AnimeFan</span>
+                            <span class="timestamp">2 hours ago</span>
+                        </div>
+                        <p class="comment-text">Just finished watching the latest episode of Jujutsu Kaisen! The animation quality is absolutely stunning! 🔥</p>
+                        <div class="comment-actions">
+                            <button class="like-btn"><i class="fas fa-heart"></i> 24</button>
+                            <button class="reply-btn"><i class="fas fa-reply"></i> Reply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=OtakuMaster&background=ff4757&color=fff" alt="User Avatar">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="username">OtakuMaster</span>
+                            <span class="timestamp">5 hours ago</span>
+                        </div>
+                        <p class="comment-text">Anyone else excited for the new Demon Slayer season? The Hashira Training Arc is going to be epic! ⚔️</p>
+                        <div class="comment-actions">
+                            <button class="like-btn"><i class="fas fa-heart"></i> 18</button>
+                            <button class="reply-btn"><i class="fas fa-reply"></i> Reply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <div class="user-avatar">
+                        <img src="https://ui-avatars.com/api/?name=WeebLife&background=1e90ff&color=fff" alt="User Avatar">
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="username">WeebLife</span>
+                            <span class="timestamp">1 day ago</span>
+                        </div>
+                        <p class="comment-text">Just started watching One Piece and I'm already hooked! The world-building is incredible! 🌊</p>
+                        <div class="comment-actions">
+                            <button class="like-btn"><i class="fas fa-heart"></i> 32</button>
+                            <button class="reply-btn"><i class="fas fa-reply"></i> Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Stay Updated!</h2>
+        <input type="email" placeholder="Enter your email" />
+        <button>Subscribe</button>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 The Anime Hub. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
