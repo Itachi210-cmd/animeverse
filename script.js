@@ -88,28 +88,33 @@ function updateWatchlistDisplay() {
 }
 
 async function fetchTopAnime(type = '') {
-    const animeGrid = document.querySelector('.anime-grid');
-    animeGrid.innerHTML = '<p>Loading top anime...</p>';
-
-    let url = 'https://api.jikan.moe/v4/top/anime?limit=25';
-    if (type) {
-        url += `&type=${type}`;
-    }
-
+    const popularAnimeSection = document.querySelector('.popular-anime');
+    const animeGrid = popularAnimeSection.querySelector('.anime-grid');
+    
     try {
+        let url = 'https://api.jikan.moe/v4/top/anime?sfw';
+        if (type) {
+            url += `&type=${type}`;
+        }
+        
+        animeGrid.innerHTML = '<div class="loading">Loading popular anime...</div>';
+        
         const response = await fetch(url);
         const data = await response.json();
-        allAnimeData = data.data;
-
-        displayAnime(allAnimeData);
+        
+        if (data.data && data.data.length > 0) {
+            displayAnime(data.data);
+        } else {
+            animeGrid.innerHTML = '<p class="no-results">No anime found.</p>';
+        }
     } catch (error) {
-        animeGrid.innerHTML = '<p>Failed to load anime.</p>';
-        console.error(error);
+        console.error('Error fetching top anime:', error);
+        animeGrid.innerHTML = '<p class="no-results">Error loading anime. Please try again later.</p>';
     }
 }
 
 function displayAnime(animeList) {
-    const animeGrid = document.querySelector('.anime-grid');
+    const animeGrid = document.querySelector('.popular-anime .anime-grid');
     if (!animeGrid) return;
     
     animeGrid.innerHTML = '';
@@ -117,6 +122,7 @@ function displayAnime(animeList) {
     animeList.forEach(anime => {
         const animeCard = document.createElement('div');
         animeCard.className = 'anime-card';
+        animeCard.setAttribute('data-type', anime.type.toLowerCase());
         animeCard.innerHTML = `
             <img src="${anime.images.jpg.image_url}" alt="${anime.title}" />
             <h3>${anime.title}</h3>
@@ -358,21 +364,58 @@ function addNewComment(text) {
     showNotification('Comment posted successfully!');
 }
 
-// Mobile Menu Toggle
+// Search functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
+    const searchInput = document.getElementById('nav-anime-search');
+    const typeFilter = document.getElementById('nav-anime-type-filter');
+    let searchTimeout;
 
-    menuToggle.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
+    // Search input handler
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            const searchTerm = this.value.trim();
+            const type = typeFilter.value;
+            
+            if (searchTerm.length >= 3) {
+                window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}&type=${type}`;
+            }
+        }, 500);
     });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar')) {
-            navLinks.classList.remove('active');
+    // Type filter handler
+    typeFilter.addEventListener('change', function() {
+        const searchTerm = searchInput.value.trim();
+        const type = this.value;
+        
+        if (searchTerm.length >= 3) {
+            window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}&type=${type}`;
         }
     });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const authButtons = document.querySelector('.auth-buttons');
+    const navSearch = document.querySelector('.nav-search');
+
+    if (menuToggle && authButtons && navSearch) {
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            authButtons.classList.toggle('active');
+            navSearch.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!menuToggle.contains(event.target) && 
+                !authButtons.contains(event.target) && 
+                !navSearch.contains(event.target)) {
+                menuToggle.classList.remove('active');
+                authButtons.classList.remove('active');
+                navSearch.classList.remove('active');
+            }
+        });
+    }
 });
 
 // Dark Mode Toggle
