@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Search Results - AnimeVerse</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+    <div class="notification-container"></div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ANIME<span>VERSE</span></a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-search">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="nav-anime-search" placeholder="Search anime..." />
+                </div>
+                <select id="nav-anime-type-filter">
+                    <option value="">All Types</option>
+                    <option value="tv">TV</option>
+                    <option value="movie">Movie</option>
+                    <option value="ova">OVA</option>
+                    <option value="special">Special</option>
+                    <option value="ona">ONA</option>
+                    <option value="music">Music</option>
+                </select>
+            </div>
+            <div class="auth-buttons">
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="signup.html" class="signup-btn">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="search-results">
+        <h1 id="search-title">Search Results</h1>
+        <div class="anime-grid"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 AnimeVerse. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to fetch anime from Jikan API
+        async function searchAnime(query, type = '') {
+            try {
+                let url = `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&sfw`;
+                if (type) {
+                    url += `&type=${type}`;
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                return data.data || [];
+            } catch (error) {
+                console.error('Error searching anime:', error);
+                return [];
+            }
+        }
+
+        // Function to display anime results
+        function displayAnime(animeList) {
+            const animeGrid = document.querySelector('.anime-grid');
+            animeGrid.innerHTML = '';
+
+            if (animeList.length === 0) {
+                animeGrid.innerHTML = '<p class="no-results">No anime found matching your search.</p>';
+                return;
+            }
+
+            animeList.forEach(anime => {
+                const animeCard = document.createElement('div');
+                animeCard.className = 'anime-card';
+                animeCard.innerHTML = `
+                    <img src="${anime.images.jpg.image_url}" alt="${anime.title}" />
+                    <h3>${anime.title}</h3>
+                    <p>Score: ${anime.score || 'N/A'}</p>
+                    <button class="add-to-watchlist-btn" onclick="addToWatchlist({
+                        id: ${anime.mal_id},
+                        title: '${anime.title.replace(/'/g, "\\'")}',
+                        image: '${anime.images.jpg.image_url}'
+                    })">
+                        <i class="fas fa-plus"></i> Add to Watchlist
+                    </button>
+                `;
+                animeGrid.appendChild(animeCard);
+            });
+        }
+
+        // Get search parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q');
+        const type = urlParams.get('type');
+
+        // Update search input and filter with current values
+        const searchInput = document.getElementById('nav-anime-search');
+        const typeFilter = document.getElementById('nav-anime-type-filter');
+
+        if (query) {
+            searchInput.value = query;
+            if (type) {
+                typeFilter.value = type;
+            }
+        }
+
+        // Update search title
+        const searchTitle = document.getElementById('search-title');
+        if (query) {
+            searchTitle.textContent = `Search Results for "${query}"`;
+        }
+
+        // Perform search on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            if (query) {
+                const results = await searchAnime(query, type);
+                displayAnime(results);
+            }
+        });
+
+        // Handle new searches
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                const searchTerm = this.value.trim();
+                if (searchTerm.length >= 3) {
+                    window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}&type=${typeFilter.value}`;
+                }
+            }, 500);
+        });
+
+        typeFilter.addEventListener('change', function() {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm.length >= 3) {
+                window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}&type=${this.value}`;
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const authButtons = document.querySelector('.auth-buttons');
+        const navSearch = document.querySelector('.nav-search');
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            authButtons.classList.toggle('active');
+            navSearch.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!menuToggle.contains(event.target) && 
+                !authButtons.contains(event.target) && 
+                !navSearch.contains(event.target)) {
+                menuToggle.classList.remove('active');
+                authButtons.classList.remove('active');
+                navSearch.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html> 
