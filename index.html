@@ -3,39 +3,52 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>The Anime Hub</title>
+    <title>AnimeVerse - Your Ultimate Anime Destination</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
     <div class="notification-container"></div>
     <nav class="navbar">
-        <div class="logo">ANIME<span>VERSE</span></div>
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
-            <li><a href="#"><i class="fas fa-star"></i> Reviews</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Top Anime</a></li>
-            <li><a href="#"><i class="fas fa-users"></i> Community</a></li>
-            <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
-        </ul>
-        <div class="auth-buttons">
-            <a href="login.html" class="login-btn">Login</a>
-            <a href="signup.html" class="signup-btn">Sign Up</a>
+        <div class="nav-container">
+            <a href="index.html" class="logo">ANIME<span>VERSE</span></a>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-search">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="nav-anime-search" placeholder="Search anime..." />
+                </div>
+                <select id="nav-anime-type-filter">
+                    <option value="">All Types</option>
+                    <option value="tv">TV</option>
+                    <option value="movie">Movie</option>
+                    <option value="ova">OVA</option>
+                    <option value="special">Special</option>
+                    <option value="ona">ONA</option>
+                    <option value="music">Music</option>
+                </select>
+            </div>
+            <div class="auth-buttons">
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="signup.html" class="signup-btn">Sign Up</a>
+            </div>
         </div>
     </nav>
 
-    <header style="background-image: url('http://getwallpapers.com/wallpaper/full/3/5/a/762971-download-free-naruto-vs-sasuke-wallpaper-1920x1080-pictures.jpg'); background-size: cover; background-position: center;">
-        <div class="header-content">
-            <h1>WELCOME TO ANIME HUB</h1>
-            <p>Your Ultimate Source for Anime News, Reviews, and Community</p>
-        </div>
+    <header>
         <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>Welcome to AnimeVerse</h1>
+            <p>Your ultimate destination for anime streaming, manga reading, and community engagement.</p>
+        </div>
     </header>
+
+    <main>
+    </main>
 
     <section class="big-three">
         <h2>The Big Three</h2>
@@ -164,20 +177,6 @@
 
     <section class="popular-anime">
         <h2>Popular Anime</h2>
-
-        <div class="anime-filters">
-            <input type="text" id="anime-search" placeholder="Search anime..." />
-            <select id="anime-type-filter">
-                <option value="">All Types</option>
-                <option value="tv">TV</option>
-                <option value="movie">Movie</option>
-                <option value="ova">OVA</option>
-                <option value="special">Special</option>
-                <option value="ona">ONA</option>
-                <option value="music">Music</option>
-            </select>
-        </div>
-
         <div class="anime-grid"></div>
     </section>
 
@@ -282,9 +281,31 @@
     </section>
 
     <footer class="footer">
-        <p>© 2025 The Anime Hub. All Rights Reserved.</p>
+        <div class="footer-content">
+            <p>&copy; 2024 AnimeVerse. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </div>
+        </div>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const authButtons = document.querySelector('.auth-buttons');
+
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                authButtons.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
