@@ -69,7 +69,7 @@ You may add an open-source license (such as MIT) if needed.
 
 ---
 
-## 🙌 Author
+## 🧑‍💻 Developer
 
 **Sujal Kate**  
   
